@@ -10,6 +10,6 @@
     {
         Pending,
         Sent,
-        Failed
+        Failed,
     }
 }
