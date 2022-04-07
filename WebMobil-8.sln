@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oop101.Polymorphism", "Oop1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Gün", "3.Gün", "{F2D2D779-CDAE-464C-9ECA-F7B80072D10F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc101", "Mvc101\Mvc101.csproj", "{E31C5C10-B2A4-4251-87D2-A0842D16167A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mvc101", "Mvc101\Mvc101.csproj", "{E31C5C10-B2A4-4251-87D2-A0842D16167A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

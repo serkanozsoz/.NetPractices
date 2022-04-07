@@ -1,6 +1,9 @@
+using Mvc101.Services.SmsService;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<ISmsService, SonicSmsService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -25,3 +28,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+//IoC Container instancelarýn kontrollü ve düzenli gelmesini saðlar.
+
+//AddScope : Her oturum baþýna 1 tane instance veriyor.
