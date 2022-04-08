@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ISmsService, WissenSmsService>();
 builder.Services.AddSendGrid(options =>
 {
-    options.ApiKey = "";
+    options.ApiKey = "apikey girilmesi gerek";
 });
 builder.Services.AddScoped<IEmailService,SendGridEmailService>();
 builder.Services.AddControllersWithViews();
@@ -44,4 +44,4 @@ app.Run();
 
 //Polymorphism : Görünüþleri ayný, çalýþma biçimleri farklý olan nesnelerin çalýþma biçimidir.
 
-//Dependence Inversion : 
+//Loosely Coupled :
