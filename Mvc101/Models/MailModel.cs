@@ -2,7 +2,7 @@
 
 public class MailModel
 {
-    public List<EmailModel> To { get; set; } = new();
+    public List<EmailModel> To { get; set; } = new();  // prop: new ile her defasında bir liste oluşturur ve 1 kez kullanılmasını sağlar.
     public List<EmailModel> Cc { get; set; } = new();
     public List<EmailModel> Bcc { get; set; } = new();
     public string Subject { get; set; }

@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ISmsService, WissenSmsService>();
 builder.Services.AddSendGrid(options =>
 {
-    options.ApiKey = "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";
+    options.ApiKey = "";
 });
 builder.Services.AddScoped<IEmailService,SendGridEmailService>();
 builder.Services.AddControllersWithViews();
