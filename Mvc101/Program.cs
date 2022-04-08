@@ -45,3 +45,6 @@ app.Run();
 //Polymorphism : Görünüþleri ayný, çalýþma biçimleri farklý olan nesnelerin çalýþma biçimidir.
 
 //Loosely Coupled :
+
+
+//delege : parametresi method olan methodlar.
