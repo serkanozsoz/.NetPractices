@@ -10,6 +10,8 @@ builder.Services.AddSendGrid(options =>
 {
     options.ApiKey = "apikey girilmesi gerek";
 });
+
+//Factory Design Pattern (DI kullanýyoruz.) -- kullanýrsak Dependence Injection kullanmýyoruz.
 builder.Services.AddScoped<IEmailService,SendGridEmailService>();
 builder.Services.AddControllersWithViews();
 
