@@ -5,6 +5,7 @@ using Identity101.Models.Identity;
 using Identity101.Models.Role;
 using Identity101.Services.Email;
 using Identity101.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace Identity101.Controllers;
 
+[AllowAnonymous]
 public class AccountController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
@@ -162,5 +164,17 @@ public class AccountController : Controller
         }
         ModelState.AddModelError(string.Empty, "Kullanıcı adı veya şifre hatalı");
         return View(model);
+    }
+
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
+    }
+
+    public IActionResult AccessDenied()
+    {
+        return View();
     }
 }
