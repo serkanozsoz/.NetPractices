@@ -8,8 +8,6 @@ namespace Identity101.ViewModels
         [Required(ErrorMessage = "Ad Alanı gereklidir.")]
         [Display(Name = "Ad")]
         [StringLength(50)]
-
-
         public string Name { get; set; }
         [Required(ErrorMessage = "Soyad alanı gereklidir.")]
         [Display(Name = "Soyad")]
