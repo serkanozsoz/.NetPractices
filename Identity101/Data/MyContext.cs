@@ -15,7 +15,7 @@ namespace Identity101.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
+            //Fluent Api
             builder.Entity<ApplicationUser>(entity =>
             {
                 entity.Property(x => x.Name).HasMaxLength(50).IsRequired(false);
