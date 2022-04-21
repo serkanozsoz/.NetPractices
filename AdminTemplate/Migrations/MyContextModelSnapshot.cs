@@ -17,7 +17,7 @@ namespace AdminTemplate.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -64,7 +64,7 @@ namespace AdminTemplate.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("07aa81d6-af5a-481a-9385-73cc9ae4265e"));
+                        .HasDefaultValue(new Guid("b8af5d15-7816-48a8-811d-2f85d61fba2f"));
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
