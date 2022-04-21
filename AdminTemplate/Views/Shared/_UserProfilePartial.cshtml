@@ -2,17 +2,19 @@
     <div class="dropdown user-pro-body">
         <div><img src="..\..\assets\images\faces\female\25.jpeg" alt="user-img" class="img-circle"></div>
         <div class="mb-2">
-            <a asp-controller="Account" asp-action="Profile" class="" data-toggle="" aria-haspopup="true" aria-expanded="false">
+            
                 @if (Context.User.Identity.IsAuthenticated)
                 {
-                    <span class="font-weight-semibold"> @Context.User.Identity.Name</span>
-                    <br><span class="text-gray">Web Designer</span>
+                    <a asp-controller="Account" asp-action="Profile" class="" data-toggle="" aria-haspopup="true" aria-expanded="false"><span class="font-weight-semibold"> @Context.User.Identity.Name</span></a>
+                    <br><span class="card-title">Web Designer</span>
+                    <a asp-controller="Account" asp-action="Logout" class="" data-toggle="" aria-haspopup="true" aria-expanded="false"><br><span class="text-gray">Logout</span></a>
+
                 }
                 else
                 {
-                    <span class="font-weight-semibold"> Please LogIn</span>
+                    <a asp-controller="Account" asp-action="Profile" class="" data-toggle="" aria-haspopup="true" aria-expanded="false"><span class="font-weight-semibold"> Please LogIn</span></a>
                 }
-            </a>
+            
             
         </div>
     </div>

@@ -49,10 +49,10 @@
                                         <span class="badge badge-secondary">administrator</span>
                                     }else if( @User.IsInRole(Roles.User) )
                                     {
-                                        <span class="badge badge-secondary">user</span>
+                                        <span class="badge badge-secondary">User</span>
                                     }
                                     else if(@User.IsInRole(Roles.Passive)){
-                                        <span class="badge badge-secondary">user</span>
+                                        <span class="badge badge-secondary">Passive</span>
                                     }
                                         
                                     
@@ -97,8 +97,9 @@
 
                                         </div>
                                     </div>
+                                    
                                     <div class="float-right mt-0 mb-0">
-
+                                        <a asp-controller="Account" asp-action="ChangePassword" class="btn btn-primary ">Change Password</a>
                                         <button class="btn btn-primary " type="submit">Update Profile</button>
                                     </div>
                                 </form>
