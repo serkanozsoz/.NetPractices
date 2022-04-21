@@ -4,6 +4,10 @@ namespace AdminTemplate.ViewModels
 {
     public class UserProfileViewModel
     {
+        [Required(ErrorMessage = "Kullanıcı ad alanı gereklidir")]
+        [Display(Name = "Kullanıcı Adı")]
+        [StringLength(50)]
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Ad Alanı gereklidir.")]
         [Display(Name = "Ad")]
@@ -16,6 +20,8 @@ namespace AdminTemplate.ViewModels
         [Required(ErrorMessage = "E-Posta alanı gereklidir.")]
         [EmailAddress]
         public string Email { get; set; }
+
+        public DateTime RegisterDate { get; set; }
     }
        
 }
