@@ -48,14 +48,39 @@ var changeColor = () => {
     
 }
 
-var copyClipboard = () => {//arrow function
-var pickerDiv = document.getElementById("picker-div");
-navigator.clipboard.writeText(pickerDiv.innerHTML);
-Swal.fire({
-    icon: 'info',
-    title: 'Kopyalandı',
-    text: pickerDiv.innerHTML,
-    footer: 'Web Mobil 8 Sınıfı'
-})
+var copyClipboard = () => { //arrow function
+
+    Swal.fire({
+        icon: 'question',
+        title: 'Kopyalansın mı?',
+        showCancelButton: true,
+        confirmButtonText: 'Kopyala',
+        cancelButtonText: `İptal`,
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        //console.log(result);
+        if (result.isConfirmed) {
+            var pickerDiv = document.getElementById("picker-div");
+            navigator.clipboard.writeText(pickerDiv.innerHTML);
+            Swal.fire('Kopyalandı!', pickerDiv.innerHTML, 'success')
+        } else if (result.isDenied) {
+            Swal.fire('İptal', 'Kopyalama işlemi iptal edildi', 'info')
+        }
+    })
 }
+
+var divMouseOver = () => { 
+    var pickerDiv = document.getElementById("picker-div");
+    
+    pickerDiv.classList.add("animate__animated");
+    pickerDiv.classList.add("animate__pulse");
+}
+
+var divMouseLeave = () => { 
+    var pickerDiv = document.getElementById("picker-div");
+    
+    pickerDiv.classList.remove("animate__animated");
+    pickerDiv.classList.remove("animate__pulse");
+}
+
 changeColor();
