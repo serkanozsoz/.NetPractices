@@ -3,12 +3,14 @@
  * that contains the map. 
  */
  #map {
-  height: 400px;
+  height: 800px;
 }
 
 /* 
  * Optional: Makes the sample page fill the window. 
  */
+
+ 
 html,
 body {
   height: 100%;
@@ -84,4 +86,10 @@ body {
   font-size: 25px;
   font-weight: 500;
   padding: 6px 12px;
+}
+
+.list-group-item:hover {
+  background-color: #4d90fe;
+  color: white;
+  transition: .5s ease-out; 
 }

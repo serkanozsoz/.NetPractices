@@ -1,4 +1,3 @@
-//GeoLocation
 let place = null;
 let places = [];
 let myPosition = null;
@@ -6,18 +5,6 @@ let destinationPosition = null;
 let directionsService = null;
 let directionsRenderer = null;
 let wayPoints = [];
-
-const checkLocalStorage = () => {
-    if (localStorage.getItem("places") === null) {
-        localStorage.setItem("places", JSON.stringify(places));
-    } else {
-        places = JSON.parse(localStorage.getItem("places"));   //Json'a çevirme
-        for (let i = 0; i < places.length; i++) {
-            let place = places[i];
-            addPlaceHtml(place);
-        }
-    }
-};
 
 var initMap = () => {
     if (navigator.geolocation) {
@@ -29,15 +16,26 @@ var initMap = () => {
         console.log("Geolocation is not supported by this browser.");
     }
 }
+const checkLocalStorage = () => {
+    if (localStorage.getItem("places") === null) {
+        localStorage.setItem("places", JSON.stringify(places));
+    } else {
+        places = JSON.parse(localStorage.getItem("places"));
+        for (let i = 0; i < places.length; i++) {
+            let place = places[i];
+            addPlaceHtml(place);
+        }
+    }
+};
 
 const showPosition = (position) => {
+    $("#place-list-container,#pac-card").slideDown(1000);
     //console.log(position);
     myPosition = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
     };
-
-    const map = new google.maps.Map(document.getElementById("map"), {
+    const map = new google.maps.Map($("#map")[0], {
         center: myPosition,
         zoom: 18,
         mapTypeControl: false,
@@ -48,10 +46,10 @@ const showPosition = (position) => {
     trafficLayer.setMap(map);
 
     directionsRenderer.setMap(map); //çiziciyi haritaya bağladık
-    directionsRenderer.setPanel(document.getElementById("mapPanel"));// sonuçlar burada gösterilecek;
+    directionsRenderer.setPanel($("#mapPanel")[0]);// sonuçlar burada gösterilecek;
 
-    const card = document.getElementById("pac-card");
-    const input = document.getElementById("pac-input");
+    const card = $("#pac-card")[0];
+    const input = $("#pac-input")[0];
     const options = {
         fields: ["formatted_address", "geometry", "name", "place_id"],
         strictBounds: false,
@@ -64,7 +62,7 @@ const showPosition = (position) => {
     autocomplete.bindTo("bounds", map);
 
     const infowindow = new google.maps.InfoWindow();
-    const infowindowContent = document.getElementById("infowindow-content");
+    const infowindowContent = $("#infowindow-content")[0];
 
     infowindow.setContent(infowindowContent);
 
@@ -107,6 +105,46 @@ const showPosition = (position) => {
         infowindow.open(map, marker);
     });
 }
+$(() => { // on page load -- document.ready
+    $("#btn-ekle").on("click", addPlace);
+    $("#btn-rota-olustur").on("click", getDirections);
+    checkLocalStorage();
+    $("#place-list-container,#pac-card").hide();
+});
+const getDirections = () => {
+    if (places.length == 0) return;
+
+    wayPoints = [];
+    for (let i = 0; i < places.length; i++) {
+        wayPoints.push({
+            stopover: true,
+            location: { placeId: places[i].id }
+        });
+    }
+    //console.log(wayPoints);
+
+    directionsService.route({
+        origin: myPosition,
+        //destination: wayPoints[wayPoints.length - 1].location,
+        destination: myPosition,
+        travelMode: "DRIVING",
+        waypoints: wayPoints,
+        optimizeWaypoints: true,
+        drivingOptions: {
+            departureTime: new Date(Date.now()),
+            trafficModel: "bestguess"
+        }
+    }, (response, status) => {
+        if (status === "OK") {
+            //console.log(response);
+            directionsRenderer.setDirections(response);
+            $("#myAudio")[0].play();// rota oluşturuldu. wissen iyi yolculuklar diler
+        } else {
+            window.alert("Directions request failed due to " + status);
+        }
+    });
+};
+
 const addPlace = () => {
     if (place != null) {
         var venue = {
@@ -128,60 +166,39 @@ const addPlace = () => {
 }
 
 const addPlaceHtml = (place) => {
-    const placeList = document.getElementById("place-list");
-    const placeItem = document.createElement("li");
-    placeList.classList.add("list-group");
-    placeList.classList.add("list-group-flush");
-    placeItem.classList.add("list-group-item");
-    placeItem.classList.add("item-silinecek");
-    placeItem.innerHTML = `${place.name}`;
-    placeList.appendChild(placeItem);
+    const placeList = $("#place-list");
+    const placeItem = $("<li>"); //document.createElement("li");
+    const deleteBtn = $("<input>"); //document.createElement("input");
 
-    placeItem.addEventListener("click", () => {
-        placeList.removeChild(placeItem);
-        // for (let i = 0; i < places.length; i++) {
-        //     const item = places[i];
-        //     if (item.id == place.id) {
-        //         places.splice(i, 1);
-        //         break;
-        //     }
-        // }
-        places = places.filter(item => item.id !== place.id);
-        localStorage.setItem("places", JSON.stringify(places));
+    placeList.addClass("list-group").addClass("list-group-flush");
+    placeItem.addClass("list-group-item").addClass("item-silinecek").addClass("d-flex").addClass("justify-content-between");
+
+    deleteBtn.addClass("btn").addClass("btn-outline-danger").addClass("btn-sm");
+    deleteBtn.attr("type", "button").attr("value", "SİL");
+
+    placeItem.html(`${place.name}`);
+    placeItem.append(deleteBtn);
+    placeList.append(placeItem);
+
+    deleteBtn.on("click", () => {
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: `${place.name} silinecek!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet!',
+            cancelButtonText: 'Hayır!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                placeItem.remove(); //place item nesnesini direk domdan kaldırır
+                places = places.filter(item => item.id !== place.id);
+                localStorage.setItem("places", JSON.stringify(places));
+            }
+        });
     });
 }
-
-const getDirections = () => {
-    if (places.length == 0) return;
-
-    wayPoints = [];
-    for (let i = 0; i < places.length; i++) {
-        wayPoints.push({
-            stopover: false,
-            location: { placeId: places[i].id }
-        });
-    }
-    //console.log(wayPoints);
-
-    directionsService.route({
-        origin: myPosition,
-        destination: myPosition,
-        travelMode: "DRIVING",
-        waypoints: wayPoints,
-        optimizeWaypoints: true,
-        drivingOptions: {
-            departureTime: new Date(Date.now()),
-            trafficModel: "bestguess"
-        }
-    }, (response, status) => {
-        if (status === "OK") {
-            //console.log(response);
-            directionsRenderer.setDirections(response);
-        } else {
-            window.alert("Directions request failed due to " + status);
-        }
-    });
-};
 
 const checkPlaces = (venue) => {
     //console.log([places, venue]);
@@ -193,7 +210,7 @@ const checkPlaces = (venue) => {
     }
     return false;
 };
-//https://snazzymaps.com/style/287720/modest
+
 const mapStyleArr = [
     {
         "featureType": "all",
