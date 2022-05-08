@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AdminTemplate.Controllers.Apis
 {
-    [Route("api/[controller]/[action]")]    // /action ekledik!
+    [Route("/api/[controller]/[action]")]    // /action ekledik!
     [ApiController]
     public class CategoryApiController : ControllerBase
     {
@@ -37,8 +37,8 @@ namespace AdminTemplate.Controllers.Apis
 
         [HttpPost]
         public IActionResult Add(Category model)
-
         {
+            Console.WriteLine();
             try
             {
                 model.CreatedUser = HttpContext.User.Identity!.Name;

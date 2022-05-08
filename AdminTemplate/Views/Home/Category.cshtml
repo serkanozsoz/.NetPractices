@@ -47,63 +47,83 @@
 </div>
 @section Scripts {
 <script>
-    $(() => {
-        GetCategories();
-        $("#switch").on("change",() => {
-                if ($("#switch").is(":checked")) {
+        $(() => {
+            GetCategories();
+            $("#switch").on("change",() => {
+                    if ($("#switch").is(":checked")) {
+                        $("#formCategory").trigger("reset");
+                        $("#cardAddCategory").slideDown(750);
+                    } else {
+                        $("#cardAddCategory").slideUp(750);
+                    }
+                });
+            $("#formCategory").submit(e => {
+                e.preventDefault();
+                var data = {
+                    "name": $("#txtCategoryName").val(),
+                    "description": $("#txtDescription").val()
+                }
+                // $.ajax({}).done(callbackfunc).fail(callbackfunc);
+                //ajax post
+                console.log(data);
+                $.ajax({
+                    url: "../../api/CategoryApi/Add",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).done(data => {
+                    toastr.options = {
+                      "closeButton": false,
+                      "debug": false,
+                      "newestOnTop": false,
+                      "progressBar": false,
+                      "positionClass": "toast-top-right",
+                      "preventDuplicates": false,
+                      "onclick": null,
+                      "showDuration": "3000",
+                      "hideDuration": "1000",
+                      "timeOut": "5000",
+                      "extendedTimeOut": "1000",
+                      "showEasing": "swing",
+                      "hideEasing": "linear",
+                      "showMethod": "fadeIn",
+                      "hideMethod": "fadeOut"
+                    }
+                    toastr["success"]("Kategori başarıyla eklendi!")
+                    //alert(data.message);
+                    //toastr kullanarak bilgilendirelim
                     $("#formCategory").trigger("reset");
-                    $("#cardAddCategory").slideDown(750);
-                } else {
-                    $("#cardAddCategory").slideUp(750);
-                }
+                    GetCategories();
+                }).fail(response => {
+                    //toastr kullanarak bilgilendirelim
+                    console.log(response);
+                });
             });
-        $("#formCategory").submit(e => {
-            e.preventDefault();
-            var data = {
-                "name": $("#txtCategoryName").val(),
-                "description": $("#txtDescription").val()
-            }
-            // $.ajax({}).done(callbackfunc).fail(callbackfunc);
-            //ajax post
-            console.log(data);
-            $.ajax({
-                url: "../../api/categoryapi/add",
-                method: "POST",
-                data: JSON.stringify(data),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }).done(data => {
-                alert(data.message);
-                //toastr kullanarak bilgilendirelim
-                $("#formCategory").trigger("reset");
-                GetCategories();
-            }).fail(response => {
-                //toastr kullanarak bilgilendirelim
+        });
+        const GetCategories = () => {
+            var settings = {
+                "url": "../../api/categoryapi/all",
+                "method": "GET"
+            };
+            $.ajax(settings).done(function(response) {
                 console.log(response);
+                addToList(response);
             });
-        });
-    });
-    const GetCategories = () => {
-        var settings = {
-            "url": "../../api/categoryapi/all",
-            "method": "GET"
         };
-        $.ajax(settings).done(function(response) {
-            console.log(response);
-            addToList(response);
-        });
-    };
-    const addToList = (categories) => {
-        const ul = $("#listCategory");
-        ul.empty();
-        categories.forEach(category => {
-            const li = $("<li>");
-            li.addClass("list-group-item");
-            li.html(`${category.name} - ${category.description}`);
-            //ul.append(li);
-            li.appendTo(ul);
-        });
-    }
+        const addToList = (categories) => {
+            const ul = $("#listCategory");
+            ul.empty();
+            categories.forEach(category => {
+                const li = $("<li>");
+                li.addClass("list-group-item");
+                li.html(`${category.name} - ${category.description}`);
+                //ul.append(li);
+                li.appendTo(ul);
+            });
+        }
+
+
 </script>
 }
