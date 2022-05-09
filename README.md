@@ -1,4 +1,4 @@
-## <a href="https://github.com/serkanozsoz/.NetPractices/tree/master/AdminTemplate">E-Ticaret Projesi(AdminTemplate)</a>
+## <a href="https://github.com/serkanozsoz/.NetPractices/tree/master/AdminTemplate">1- E-Ticaret Projesi(AdminTemplate)</a>
 
 ASP.Net MVC ve ASP.Net Web Api ile Login-Register-Authentication-Authorization-Change Password-Update Profile-Send Email (Login-Register-Change Password- Update gibi işlemlerde e-mail gönderme) -Add Category-Add Product işlemlerini içeren bir sistem.
 
