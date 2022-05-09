@@ -1,5 +1,5 @@
 ## <a href="https://github.com/serkanozsoz/OopPratictices/tree/master/UmlDiagrams/UniversityManagementSystem">E-Ticaret Projesi(AdminTemplate)</a>
-=========================
+
 ASP.Net MVC ve ASP.Net Web Api ile Login-Register-Send Email-Add Category-Add Product işlemlerini içeren bir sistem.
 
 ----------
