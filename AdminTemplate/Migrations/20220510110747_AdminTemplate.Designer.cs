@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdminTemplate.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20220420194330_AdminTemplate")]
+    [Migration("20220510110747_AdminTemplate")]
     partial class AdminTemplate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,7 +48,7 @@ namespace AdminTemplate.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("UpdatedTime")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedUser")
@@ -66,7 +66,7 @@ namespace AdminTemplate.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("b8af5d15-7816-48a8-811d-2f85d61fba2f"));
+                        .HasDefaultValue(new Guid("7b3a8533-cc14-42b2-8b67-9b5ca638a4d3"));
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -87,7 +87,7 @@ namespace AdminTemplate.Migrations
                         .HasPrecision(8, 2)
                         .HasColumnType("decimal(8,2)");
 
-                    b.Property<DateTime?>("UpdatedTime")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedUser")

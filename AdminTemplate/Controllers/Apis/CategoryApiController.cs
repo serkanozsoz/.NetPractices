@@ -83,7 +83,7 @@ namespace AdminTemplate.Controllers.Apis
                 category.Name = model.Name;
                 category.Description = model.Description;
                 category.UpdatedUser = HttpContext.User.Identity!.Name;
-                //category.UpdatedDate = DateTime.UtcNow;
+                category.UpdatedDate = DateTime.UtcNow;
                 _context.SaveChanges();
                 return Ok(new
                 {

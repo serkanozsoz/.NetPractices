@@ -62,7 +62,7 @@ namespace AdminTemplate.Migrations
                     Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedUser = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedUser = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -180,13 +180,13 @@ namespace AdminTemplate.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValue: new Guid("b8af5d15-7816-48a8-811d-2f85d61fba2f")),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValue: new Guid("7b3a8533-cc14-42b2-8b67-9b5ca638a4d3")),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(8,2)", precision: 8, scale: 2, nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedUser = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedUser = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

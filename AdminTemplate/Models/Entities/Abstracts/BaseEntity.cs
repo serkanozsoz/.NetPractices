@@ -5,8 +5,7 @@
         public T Id { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public string CreatedUser { get; set; }
-        public DateTime? UpdatedTime { get; set; }
+        public DateTime? UpdatedDate { get; set; }
         public string? UpdatedUser { get; set; }
-
     }
 }
