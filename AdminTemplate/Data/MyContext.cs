@@ -49,6 +49,7 @@ public sealed class MyContext : IdentityDbContext<ApplicationUser, ApplicationRo
             entity.Property(x => x.UnitPrice).HasPrecision(8, 2);
         });
     }
+
     public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
 }
