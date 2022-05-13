@@ -1,6 +1,6 @@
 ﻿using AdminTemplate.BusinessLogic.Repository.Abstracts.EntityFrameworkCore;
-using AdminTemplate.Models.Entities;
 using AdminTemplate.Data;
+using AdminTemplate.Models.Entities;
 
 namespace AdminTemplate.BusinessLogic.Repository
 {
